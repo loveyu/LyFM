@@ -82,7 +82,6 @@ LyEdit.prototype.init = function(){
 		,EA_load_callback: "LyEdit.prototype.loader"
 		,save_callback: "LyEdit.prototype.save"
 		,show_line_colors: true
-		,replace_tab_by_spaces: 4
 	});
 };
 LyEdit.prototype.save = function(id, content){
