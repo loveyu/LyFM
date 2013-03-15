@@ -11,8 +11,10 @@ class LyUrl{
 		$this->init_param();
 	}	
 	private function make_list(){
-		if($_SERVER['SCRIPT_NAME']==$this->path)return array();
-		if('/'==$this->path)return array();
+		if($this->path=='' || '/'==$this->path || $_SERVER['SCRIPT_NAME']==$this->path)return array();
+		if(substr($this->path,0,1)!='/'){
+			$this->path = "/".$this->path;
+		}
 		if(substr($this->path,-1)=='/'){
 			return explode("/",substr($this->path,1,-1));
 		}else{
@@ -29,12 +31,15 @@ class LyUrl{
 		define('URL_PATH',dirname($_SERVER['SCRIPT_NAME']));
 		$i = strpos($_SERVER['REQUEST_URI'],$_SERVER['SCRIPT_NAME']);
 		if($i==0 && $i!==false){
-			define('WEB_URL',((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')?'https://':'http://').$_SERVER["HTTP_HOST"].$_SERVER['SCRIPT_NAME']."/");
-			define('WEB_FILE_URL',((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')?'https://':'http://').$_SERVER["HTTP_HOST"].dirname($_SERVER['SCRIPT_NAME'])."/");
+			define('WEB_URL',((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')?'https://':'http://').$_SERVER["HTTP_HOST"].$this->clean_url_more_char($_SERVER['SCRIPT_NAME']."/"));
+			define('WEB_FILE_URL',((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')?'https://':'http://').$this->clean_url_more_char($_SERVER["HTTP_HOST"].dirname($_SERVER['SCRIPT_NAME'])."/"));
 		}else{
-			define('WEB_URL',((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')?'https://':'http://').$_SERVER["HTTP_HOST"].dirname($_SERVER['SCRIPT_NAME'])."/");
+			define('WEB_URL',((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')?'https://':'http://').$_SERVER["HTTP_HOST"].$this->clean_url_more_char(dirname($_SERVER['SCRIPT_NAME'])."/"));
 			define('WEB_FILE_URL',WEB_URL);
 		}
+	}
+	private function clean_url_more_char($url){
+		return preg_replace("/[\/\\\]+/","/",$url);
 	}
 	private function make_req(){
 		if(!isset($_SERVER['PATH_INFO'])){

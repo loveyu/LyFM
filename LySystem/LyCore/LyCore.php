@@ -171,7 +171,7 @@ class LyCore{
 		$list = func_get_args();
 		$_class = array();
 		foreach($list as $name){
-			if(isset($name) && is_file(LIB_PATH.$name.'.php')){
+			if(!isset($this->lib[$name]) && is_file(LIB_PATH.$name.'.php')){
 				require_once(LIB_PATH.$name.'.php');
 				if(class_exists($name)){
 					$_class[$name] = new $name();
@@ -198,7 +198,7 @@ class LyCore{
 		}
 		include(CORE_PATH."page/$__CORE_name.php");
 	}
-	public function view($__CORE_file,$__CORE_once=false,$__CORE_param=array()){
+	public function view($__CORE_file,$__CORE_param=array(),$__CORE_once=false){
 		//加载默认变量
 		$_CORE = &$this;
 		foreach($this->lib as $__CORE_name => $__CORE_value){
@@ -207,7 +207,7 @@ class LyCore{
 		}
 		$_CONFIG = &$this->config;
 		unset($__CORE_name,$__CORE_value,$__CORE_TMP);
-		
+
 		//加载文件
 		if(is_file(VIEW_PATH.$__CORE_file.".php")){
 			foreach($__CORE_param as $__CORE_name => $__CORE_v){
