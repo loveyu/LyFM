@@ -956,16 +956,16 @@ LyFM.prototype.set_update_value = function(data){
 	$("#feedback_url").attr("href",remove_html(data['feedback_url']));
 	$("#file_action .new_version").remove();
 	if(VERSION<data['top_version']){
-		$("#feedback_url").after("<a class=\"new_version\" href=\""+remove_html(data['top_download'])+"\">下载 "+remove_html(data['top_version'])+"</a>");
+		$("#feedback_url").after("<a class=\"new_version\" target=\"_blank\" href=\""+remove_html(data['top_download'])+"\">下载 "+remove_html(data['top_version'])+"</a>");
 	}else{
 		$("#file_action .bug ul").append("<li>当前为最新版本</li>");
 	}
 	$("#file_action .bug ul").html("");
 	for(i in data['bug_list']){
-		$("#file_action .bug ul").append("<li><a style=\"color:red;\" href=\""+remove_html(data['bug_list'][i]['url'])+"\">"+remove_html(data['bug_list'][i]['title'])+"</a></li>");
+		$("#file_action .bug ul").append("<li><a style=\"color:red;\" href=\""+remove_html(data['bug_list'][i]['url'])+"\" target=\"_blank\">"+remove_html(data['bug_list'][i]['title'])+"</a></li>");
 	}
 	for(i in data['update_list']){
-		$("#file_action .bug ul").append("<li><a href=\""+remove_html(data['update_list'][i]['url'])+"\">"+remove_html(data['update_list'][i]['title'])+"</a></li>");
+		$("#file_action .bug ul").append("<li><a href=\""+remove_html(data['update_list'][i]['url'])+"\" target=\"_blank\">"+remove_html(data['update_list'][i]['title'])+"</a></li>");
 	}	
 };
 Date.prototype.format = function (format) {
