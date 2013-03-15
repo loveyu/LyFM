@@ -14,10 +14,8 @@ function LyUpload(){
 							'<div id="Upload_Box_QueueID"></div>'+
 						'</div>');
 	$('#file_upload').uploadify({
-		'formData'     : {
-			'path' : NOW_PATH
-		},
 		'auto'     : false,
+		'formData'	:{'path' : NOW_PATH},
 		'buttonText'	: '选择文件集',
 		'queueID'	: 'Upload_Box_QueueID',
 		'swf'      : FILE_URL + 'swf/uploadify.swf',
@@ -39,6 +37,7 @@ LyUpload.prototype = {
 		$("#Upload_Box").css("left",(($(window).width()-$("#Upload_Box").width())/1.7)+'px');
 	},
 	upload:function(){
+		$("#file_upload").uploadify("settings", "formData", {'path':NOW_PATH});  
 		$('#file_upload').uploadify('upload','*');
 	},
 	min_box:function(){
