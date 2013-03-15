@@ -1,7 +1,7 @@
-Ê×´ÎÊ¹ÓÃÇëÅäÖÃconfig.phpÎÄ¼þ
+é¦–æ¬¡ä½¿ç”¨è¯·é…ç½®config.phpæ–‡ä»¶
 
-ÐÞ¸ÄÄ¬ÈÏÃÜÂë
+ä¿®æ”¹é»˜è®¤å¯†ç 
 
-Èç¹ûÊ¹ÓÃlocalhost½øÐÐÑÝÊ¾ÇëÊ¹ÓÃ127.0.0.1ÓòÃû£¬²¢ÔÚCOOKIEÓòÃûÖÐ½øÐÐÉè¶¨
+å¦‚æžœä½¿ç”¨localhostè¿›è¡Œæ¼”ç¤ºè¯·ä½¿ç”¨127.0.0.1åŸŸåï¼Œå¹¶åœ¨COOKIEåŸŸåä¸­è¿›è¡Œè®¾å®š
 
-½¨Òé½«³ÌÐò·ÅÔÚfileÄ¿Â¼ÏÂ£¬nginxºÍapacheÎ±¾²Ì¬ÅäÖÃÇë²Î¿¼·¶Àý
+å»ºè®®å°†ç¨‹åºæ”¾åœ¨fileç›®å½•ä¸‹ï¼Œnginxå’Œapacheä¼ªé™æ€é…ç½®è¯·å‚è€ƒèŒƒä¾‹
