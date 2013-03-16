@@ -22,7 +22,8 @@ function get_lib($name=''){
 	}
 }
 function get_config(){
-	return call_user_func_array(array(get_core(),'get_config'),func_get_args());
+	$args = func_get_args();
+	return call_user_func_array(array(get_core(),'get_config'),$args);
 }
 function get_url($param=''){
 	if(is_array($param))return WEB_URL.implode("/",$param);

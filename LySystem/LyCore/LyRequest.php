@@ -22,7 +22,8 @@ class LyRequest{
 		return $array;
 	}
 	public function get_s(){
-		$rt = call_user_func_array(array($this,'get'),func_get_args());
+		$args = func_get_args();
+		$rt = call_user_func_array(array($this,'get'),$args);
 		if(is_array($rt)){
 			foreach($rt as $id => $v){
 				if(is_array($v)){

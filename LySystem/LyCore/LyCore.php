@@ -30,7 +30,8 @@ class LyCore{
 	}
 	public function get_config(){
 		$r = '';
-		foreach(func_get_args() as $v){
+		$args = func_get_args();
+		foreach($args as $v){
 			$r .= "['$v']";
 		}
 		if($r){
@@ -50,7 +51,8 @@ class LyCore{
 			$this->core_error('Filter LIB 库加载失败');
 		}
 		if(!$this->web_open()){
-			call_user_func_array(array($this,'load'),func_get_args());
+			$args = func_get_args();
+			call_user_func_array(array($this,'load'),$args);
 		}
 	}
 	public function load(){
