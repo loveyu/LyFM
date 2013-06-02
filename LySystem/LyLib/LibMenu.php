@@ -5,7 +5,8 @@ class LibMenu{
 		$this->menu = array();
 	}
 	public function set(){
-		$this->menu = array_merge(func_get_args(),$this->menu);
+		$args = func_get_args();
+		$this->menu = array_merge($args,$this->menu);
 	}
 	public function the_menu($begin,$end,$all_class,$page_class,$now){
 		foreach($this->get_menu() as $v){
