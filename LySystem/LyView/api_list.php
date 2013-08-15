@@ -127,9 +127,9 @@ $list =	array(
 <ul>
 <?php foreach($list as $v){ ?>
 	<li><div>
-		<h3><?=$v['name']?></h3>
-		<p class="api"><?=$v['url']?></p>
-		<p class="des">参数：<?=$v['param']?></p>
+		<h3><?php echo $v['name']?></h3>
+		<p class="api"><?php echo $v['url']?></p>
+		<p class="des">参数：<?php echo $v['param']?></p>
 	</div></li>
 <?php }?>
 </ul>

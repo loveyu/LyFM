@@ -97,7 +97,7 @@ $list =	array(
 <ul>
 <?php foreach($list as $v){ ?>
 	<li><div>
-		<h3 id="<?=$v['id']?>"><?=$v['name']?></h3>
+		<h3 id="<?php echo $v['id']?>"><?php echo $v['name']?></h3>
 		<p class="reason">原因：<?=$v['reason']?></p>
 		<p class="answer">解决：<?=$v['answer']?></p>
 	</div></li>
