@@ -2,7 +2,7 @@
 
 </div>
 <div id="footer">
-	<p>&copy;&nbsp;CopyRight&nbsp;<span>loveyu.net</span>&nbsp;<a href="http://www.loveyu.net/LyFm">LyFM PHP文件管理器</a>&nbsp;&nbsp;&nbsp;&nbsp;( 当前版本: <?php echo VERSION?> )</p>
+	<p>&copy;&nbsp;CopyRight&nbsp;<span>loveyu.net</span>&nbsp;<a href="http://www.loveyu.net/lyfm">LyFM PHP文件管理器</a>&nbsp;&nbsp;&nbsp;&nbsp;( 当前版本: <?php echo VERSION?> )</p>
 </div>
 </div>
 </body>

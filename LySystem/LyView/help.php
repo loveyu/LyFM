@@ -98,8 +98,8 @@ $list =	array(
 <?php foreach($list as $v){ ?>
 	<li><div>
 		<h3 id="<?php echo $v['id']?>"><?php echo $v['name']?></h3>
-		<p class="reason">原因：<?php echo $v['reason']?></p>
-		<p class="answer">解决：<?php echo $v['answer']?></p>
+		<p class="reason">原因：<?=$v['reason']?></p>
+		<p class="answer">解决：<?=$v['answer']?></p>
 	</div></li>
 <?php }?>
 </ul>
