@@ -7,13 +7,13 @@ function LyFM(id){
 	LyFM.ID = id;
 	this.reSizeSidebar();
 }
-TextFileExtenName = new Array('tpl','eml','txt','htaccess','php','php5','json','xml','asp','html','htm','jsp','java','c','cpp','h','cmd','sh','m','cc','cxx','hxx','hpp','log','ini','cs','inc','pas','phtml','js','jsp','css','sh','bsh','pl','py','rc','vb','vbs','as','asm','f','sql','tex','md','readme','srt','conf');
+TextFileExtenName = new Array('tpl','eml','txt','htaccess','php','php5','json','xml','xsl','asp','html','htm','jsp','java','c','cpp','h','cmd','sh','m','cc','cxx','hxx','hpp','log','ini','cs','inc','pas','phtml','js','jsp','css','sh','bsh','pl','py','rc','vb','vbs','as','asm','f','sql','tex','md','readme','srt','conf');
 ImageFileExtenName = new Array('jpg','jpeg','png','bmp','ico','gif','tif','tiff');
 AudioFileExtenName = new Array('mp3','ogg','wav');
 VideoFileExtenName = new Array('mp4','mkv','3gp','mpeg','mpeg4','flv','f4v','vob','mpg');
 CharsetList = Array('UTF-8','GBK','GB2312','ASCII','UNICODE','BIG5','UCS-2','UCS-2LE','UCS-2BE');
 LyFM.ID;
-LyFM.update_url = "http://www.loveyu.net/lyfm/update.php";
+LyFM.update_url = "http://www.loveyu.net/Update/LyFm.php";
 LyFM.file_list;
 LyFM.image_count;
 LyFM.video_count;

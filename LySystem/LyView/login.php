@@ -1,7 +1,7 @@
 <div id="login">
 <fieldset>
 	<legend><h1>个人账户密码认证</h1></legend>
-	<form action="<?=get_url('Login/post')?>" method="post">
+	<form action="<?php echo get_url('Login/post')?>" method="post">
 <?php if(get_core('LyGet')->get('status')=='error'):?>
 	<p class="error">登录失败，密码错误！</p>
 <?php endif;?>
@@ -10,7 +10,7 @@
 			<input class="password" name="password" value="" type="password" />
 		</label>
 		<button class="submit" type="submit">确认</button>
-		<input name="redirect" value="<?=urldecode(get_core('LyGet')->get('redirect'))?>" type="hidden" />
+		<input name="redirect" value="<?php echo urldecode(get_core('LyGet')->get('redirect'))?>" type="hidden" />
 	</form>
 </fieldset>
 </div>

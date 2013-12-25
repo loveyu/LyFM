@@ -48,7 +48,7 @@
 		</ul>
 	</div>
 	<div class="box">
-		 <a href='http://me.alipay.com/iloveyu' target="_blank"> <img src='<?=get_file_url('images/alipay_pay.png')?>' /></a>
+		 <a href='http://me.alipay.com/iloveyu' target="_blank"> <img src='<?php echo get_file_url('images/alipay_pay.png')?>' /></a>
 	</div>	
 </div>
 <div class="clear"></div>
@@ -60,7 +60,7 @@
 	<form id="make_file" class="box" onSubmit="return false;">
 	<label><span>新文件：</span><input type="text" name="name" value="" /></label>
 <?php $file_char_set = array('UTF-8','GBK','GB2312','ASCII','UNICODE','BIG5','UCS-2','UCS-2LE','UCS-2BE');?>
-	<label><span>编码：</span><select name="char_set"><?php foreach($file_char_set as $v){ ?><option><?=$v?></option><?php }?></select></label>
+	<label><span>编码：</span><select name="char_set"><?php foreach($file_char_set as $v){ ?><option><?php echo $v?></option><?php }?></select></label>
 	<button type="submit">创建</button>
 	</form>
 	<div class="box"><button type="button" onClick="return web_download();" class="big">远程下载文件</button></div>
