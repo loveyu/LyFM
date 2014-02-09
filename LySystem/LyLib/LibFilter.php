@@ -7,7 +7,7 @@ class LibFilter{
 		if($login->is_login()){
 			return true;
 		}else{
-			if(isset($url_list[0]) && in_array($url_list[0],array('Login','Api','Help','About'))){
+			if(isset($url_list[0]) && in_array($url_list[0],array('Login','Help','About'))){
 				return true;
 			}
 			redirect(get_url('Login?redirect='.urlencode(NOW_URL)));
