@@ -26,7 +26,7 @@ class LibFile{
 			$ret['file'][$i]['create'] = @filectime($system);
 			$ret['file'][$i]['altera'] = @filemtime($system);
 			$ret['file'][$i]['d_create'] = @date("Y年m月d日 H:i.s",$ret['file'][$i]['create']);
-			$ret['file'][$i]['d_altera'] = @date("Y年m月d日 H:i.s",$ret['file'][$i]['altera']);			
+			$ret['file'][$i]['d_altera'] = @date("Y年m月d日 H:i.s",$ret['file'][$i]['altera']);
 			$ret['file'][$i]['exten'] = @pathinfo($file,PATHINFO_EXTENSION);
 			$i++;
 		}
@@ -42,7 +42,7 @@ class LibFile{
 			$ret['dir'][$i]['create'] = @filectime($system);
 			$ret['dir'][$i]['altera'] = @filemtime($system);
 			$ret['dir'][$i]['d_create'] = @date("Y年m月d日 H:i.s",$ret['file'][$i]['create']);
-			$ret['dir'][$i]['d_altera'] = @date("Y年m月d日 H:i.s",$ret['file'][$i]['altera']);	
+			$ret['dir'][$i]['d_altera'] = @date("Y年m月d日 H:i.s",$ret['file'][$i]['altera']);
 			$ret['dir'][$i]['owner_id'] = @fileowner($file);
 			$ret['dir'][$i]['group_id'] = @filegroup($system);
 			$l2 = get_core('LyFile')->count_file_list($this->do_path($dir));
@@ -255,12 +255,12 @@ class LibFile{
 		if(!is_file($path))return array('status'=>false,'error'=>'zip文件不存在');
 		$zip = new ZipArchive;
 		$list = array();
-		if($zip->open($path)){ 
-			for($i = 0; $i < $zip->numFiles; $i++){   
-				$list[] = $zip->getNameIndex($i); 
+		if($zip->open($path)){
+			for($i = 0; $i < $zip->numFiles; $i++){
+				$list[] = $zip->getNameIndex($i);
 			}
 			$zip->close();
-		}else{ 
+		}else{
 			return array('status'=>false,'error'=>'ZIP文件打开失败');
 		}
 		return array('status'=>true,'error'=>'','list'=>$list);
@@ -284,7 +284,7 @@ class LibFile{
 		else return '';
 	}
 	public function get_basename($filename){
-		return preg_replace('/^.+[\\\\\\/]/', '', $filename);  
+		return preg_replace('/^.+[\\\\\\/]/', '', $filename);
     }
 	public function get_file($file,$char_set="utf-8"){
 		$file = system_path($this->do_path($file));
@@ -329,7 +329,7 @@ class LibFile{
 		return $arr;
 	}
 	public function get_media($path){
-		$rt = array('status'=>false,'error'=>'','name'=>$this->get_basename($path));	
+		$rt = array('status'=>false,'error'=>'','name'=>$this->get_basename($path));
 		$path = system_path($this->do_path($path));
 		$ext = pathinfo($path,PATHINFO_EXTENSION);
 		if(!in_array(strtolower($ext),$this->Media)){
@@ -428,7 +428,7 @@ class LibFile{
 		return $rt;
 	}
 	public function move_upload_file($path,$file){
-		$rt = array('status'=>false,'error');
+		$rt = array('status'=>false,'error'=>'');
 		if(!$file || !isset($file['error'])){
 			$rt['error'] = '上传文件不存在';
 			return $rt;
@@ -475,7 +475,7 @@ class LibFile{
 		}else{
 			$rt['status'] = true;
 			return $rt;
-		}		
+		}
 	}
 	public function file_to_mail($path,$list,$more,$email,$method){
 		set_time_limit(0);
@@ -532,13 +532,13 @@ class LibFile{
 				if(!chmod($path."/".$v2,$file)){
 					$rt['error'] = $v.' 文件权限任务失败，导致部分任务失败';
 					return $rt;
-				}	
+				}
 			}else if(is_dir($path."/".$v2)){
 				if($re=='false'){
 					if(!chmod($path."/".$v2,$file)){
 						$rt['error'] = $v.' 文件夹权限任务失败，导致部分任务失败';
 						return $rt;
-					}			
+					}
 				}else{
 					$ex = get_core('LyFile')->recursion_change_perms($path."/".$v2,$file,$dir);
 					if($ex!==false){
@@ -561,7 +561,7 @@ class LibFile{
 		}
 		for($i=ord('A');$i<=ord('Z');++$i){
 			if(is_readable(chr($i).":")){
-				array_push($arr['list'],chr($i).":");	
+				array_push($arr['list'],chr($i).":");
 			}
 		}
 		$arr['status'] = true;
@@ -586,7 +586,7 @@ class LibFile{
 		if($size>20971520 || $size<0){
 			$rt['error'] = '文件大小限制在20M，避免内存泄露';
 			return $rt;
-		}		
+		}
 		@file_put_contents($path,@mb_convert_encoding(file_get_contents($path),$new_char,$old_char));
 		$rt['status'] = true;
 		return $rt;
