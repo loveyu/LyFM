@@ -1025,7 +1025,6 @@ function is_image_ext_name(exten) {
 	for (var i = 0; i < ImageFileExtenName.length; i++) {
 		if (ImageFileExtenName[i] == exten) {
 			++LyFM.image_count;
-			i = j;
 			return true;
 		}
 	}
