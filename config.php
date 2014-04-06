@@ -11,7 +11,7 @@ $config = array(
 	),
 	'mail' => array(//PHPmailer配置文件
 		'SMTPDebug'	=>	'2',
-		'SMTPAuth'	=>	true, 
+		'SMTPAuth'	=>	true,
 		'SMTPSecure'	=>	'ssl',
 		'Host'	=>	'smtp.qq.com',
 		'Port'	=>	'465',
@@ -25,4 +25,12 @@ $config = array(
 	),
 	'MaxDlSize' => '52428800',//B 最大下载文件
 );
+define('_Debug_', false);
+if(_Debug_){
+    ini_set('display_errors','on');
+    error_reporting(E_ALL | E_STRICT);
+} else{
+    ini_set('display_errors','off');
+    error_reporting(0);
+}
 ?>
