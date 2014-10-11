@@ -39,6 +39,10 @@ class LyCookie{
 	}
 	private function get_domain($domain){
 		$host = $_SERVER['HTTP_HOST'];
+		if(strlen($host) >3 && is_numeric(str_replace(".","",substr($host,-3)))){
+			//排除HOST为IP的情形
+			return $domain;
+		}
 		if(''==$domain){
 			if(!$this->domain){
 				if(strpos($host,'www.')===0){

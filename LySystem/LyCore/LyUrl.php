@@ -9,7 +9,7 @@ class LyUrl{
 	private $url_list;
 	function __construct(){
 		$this->init_param();
-	}	
+	}
 	private function make_list(){
 		if($this->path=='' || '/'==$this->path || $_SERVER['SCRIPT_NAME']==$this->path)return array();
 		if(substr($this->path,0,1)!='/'){
@@ -27,19 +27,20 @@ class LyUrl{
 	private function init_param(){
 		$this->make_req();
 		$this->url_list = $this->make_list();
-		define('NOW_URL',((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')?'https://':'http://').$_SERVER["HTTP_HOST"].$_SERVER['REQUEST_URI']);
+		$is_https = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' && !empty($_SERVER['HTTPS']);
+		define('NOW_URL',($is_https?'https://':'http://').$_SERVER["HTTP_HOST"].$_SERVER['REQUEST_URI']);
 		define('URL_PATH',dirname($_SERVER['SCRIPT_NAME']));
 		$i = strpos($_SERVER['REQUEST_URI'],$_SERVER['SCRIPT_NAME']);
 		if($i==0 && $i!==false){
-			define('WEB_URL',((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')?'https://':'http://').$_SERVER["HTTP_HOST"].$this->clean_url_more_char($_SERVER['SCRIPT_NAME']."/"));
-			define('WEB_FILE_URL',((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')?'https://':'http://').$this->clean_url_more_char($_SERVER["HTTP_HOST"].dirname($_SERVER['SCRIPT_NAME'])."/"));
+			define('WEB_URL',($is_https?'https://':'http://').$_SERVER["HTTP_HOST"].$this->clean_url_more_char($_SERVER['SCRIPT_NAME']."/"));
+			define('WEB_FILE_URL',($is_https?'https://':'http://').$this->clean_url_more_char($_SERVER["HTTP_HOST"].dirname($_SERVER['SCRIPT_NAME'])."/"));
 		}else{
-			define('WEB_URL',((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')?'https://':'http://').$_SERVER["HTTP_HOST"].$this->clean_url_more_char(dirname($_SERVER['SCRIPT_NAME'])."/"));
+			define('WEB_URL',($is_https?'https://':'http://').$_SERVER["HTTP_HOST"].$this->clean_url_more_char(dirname($_SERVER['SCRIPT_NAME'])."/"));
 			define('WEB_FILE_URL',WEB_URL);
 		}
 	}
 	private function clean_url_more_char($url){
-		return preg_replace("/[\/\\\]+/","/",$url);
+		return preg_replace("/[\\/\\\]+/","/",$url);
 	}
 	private function make_req(){
 		if(!isset($_SERVER['PATH_INFO'])){
