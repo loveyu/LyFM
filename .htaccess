@@ -2,3 +2,7 @@ RewriteEngine On
 RewriteBase /file/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ /file/index.php/$1 [L]
+
+#禁止访问系统目录和配置目录
+RewriteCond %{REQUEST_URI} ^(\/file\/LySystem\/).*  [NC]
+RewriteRule ^(.*)$ /file/index.php [L]
