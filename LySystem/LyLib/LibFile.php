@@ -470,8 +470,23 @@ class LibFile{
 			return $rt;
 		}
 		for ($size = 0; !feof($dp); $size += 1024) {
-			$ok = fwrite($fp,fread($dp,1024));
-			if ($size > $max or !$ok) {
+			$s = fread($dp,1024);
+			if($s==false){
+				fclose($dp);
+				fclose($fp);
+				unlink($fn);
+				$rt['error'] = '网络读取错误！终止！';
+				return $rt;
+			}
+			$ok = fwrite($fp,$s);
+			if($ok==false){
+				fclose($dp);
+				fclose($fp);
+				unlink($fn);
+				$rt['error'] = '文件写入错误！终止！';
+				return $rt;
+			}
+			if ($size > $max) {
 				fclose($dp);
 				fclose($fp);
 				unlink($fn);
@@ -493,7 +508,7 @@ class LibFile{
 			return $rt;
 		}
 		if($file['error']>0){
-			$rt['error'] = '错误代码 '+$file['error'];
+			$rt['error'] = '错误代码 '.$file['error'];
 			return $rt;
 		}
 		$path = system_path($this->do_path($path."/".$file['name']));
