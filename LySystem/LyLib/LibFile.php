@@ -386,16 +386,39 @@ class LibFile{
 		$rt['path'] = $path;
 		return $rt;
 	}
-	public function url_download($path,$url,$name=''){
+	private function location_parse($url,$location){
+		if(filter_var($location,FILTER_VALIDATE_URL)){
+			return $location;
+		}else{
+			$info = parse_url($url);
+			$host = $info['scheme']."://".(isset($info['user'])?($info['user'].(isset($info['pass'])?":".$info['pass']:"")."@"):"").$info['host'];
+			if($location[0]=="/"){
+				return $host.$location;
+			}else{
+				if($info['path'][strlen($info['path'])-1]=="/"){
+					return $host.$info['path'].$location;
+				}else{
+					return $host.dirname($info['path'])."/".$location;
+				}
+			}
+		}
+	}
+	public function url_download($path,$url,$name='',$deep=1){
 		set_time_limit(0);
 		$time = new LyTime();
 		$rt = array('status'=>false,'error'=>'','name'=>'','size'=>'','time'=>'');
-		$path = system_path($this->do_path($path));
 		if(!filter_var($url,FILTER_VALIDATE_URL)){
 			$rt['error'] = 'URL地址不正确';
 			return $rt;
 		}else{
 			$header = @get_headers($url,true);
+			if(isset($header['Location']) && !empty($header['Location'])){
+				if($deep>10){
+					$rt['error'] = '过多的重定向，失败';
+					return $rt;
+				}
+				return $this->url_download($path,$this->location_parse($url,$header['Location']),$name,$deep+1);
+			}
 			if(isset($header['Content-Length'])){
 				if(is_array($header['Content-Length']))$length = array_pop($header['Content-Length']);
 				else $length = $header['Content-Length'];
@@ -419,6 +442,7 @@ class LibFile{
 			}
 			unset($header);
 		}
+		$path = system_path($this->do_path($path));
 		if(!is_dir($path)){
 			$rt['error'] = '文件目录不存在';
 			return $rt;

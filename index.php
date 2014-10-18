@@ -1,5 +1,5 @@
 <?php
-define('VERSION','0.2.0');
+define('VERSION','0.2.1');
 require_once('LySystem/LyCore/LyCore.php');
 $LyFile = new LyCore('LySystem/LyCore','LySystem/LyPage','LySystem/LyView','LySystem/LyLib');//核心文件夹目录，页面文件夹,视图文件夹,用户定义类
 $LyFile->load_config("config");
