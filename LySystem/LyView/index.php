@@ -1,7 +1,16 @@
 <div id="file_list">
 	<div class="path">
 		<h3>当前路径：</h3>
-		<span class="refresh"><?php if($_CORE->get_os()=='Win'){?><a href="#" onClick="return choice_drive();">选择驱动器</a> <?php }?><a href="#" onClick="return load_file_list(ROOT)">还原</a> <a href="#" onClick="return load_file_list(NOW_PATH)">刷新</a></span>
+		<span class="refresh"><span class="order_select_box"><label for="SelectOrder">排序：<select  onchange="order_change()" id="SelectOrder">
+					<option value="name">名称</option>
+					<option value="size">大小</option>
+					<option value="create">创建时间</option>
+					<option value="altera">修改时间</option>
+				</select></label>
+			<label for="SelectOrder2"><select  onchange="order_change()" id="SelectOrder2">
+					<option value="asc">升序</option>
+					<option value="desc">降序</option>
+				</select></label></span><?php if($_CORE->get_os()=='Win'){?><a href="#" onClick="return choice_drive();">选择驱动器</a> <?php }?><a href="#" onClick="return load_file_list(ROOT)">还原</a> <a href="#" onClick="return load_file_list(NOW_PATH)">刷新</a></span>
 		<div class="clear"></div>
 	</div>
 	<div class="table_head">

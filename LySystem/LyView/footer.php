@@ -2,7 +2,7 @@
 
 </div>
 <div id="footer">
-	<p>&copy;&nbsp;CopyRight&nbsp;<span>loveyu.net</span>&nbsp;<a href="http://www.loveyu.net/LyFm">LyFM PHP文件管理器</a>&nbsp;&nbsp;&nbsp;&nbsp;( 当前版本: <?php echo VERSION?> )</p>
+	<p>&copy;<span>loveyu.org</span>&nbsp;&nbsp;<a href="http://www.loveyu.net/LyFm">LyFM PHP文件管理器</a><?php if($_LibLogin->is_login()):?>&nbsp;&nbsp;&nbsp;&nbsp;( 当前版本: <?php echo VERSION?> )<?php endif;?></p>
 </div>
 </div>
 </body>

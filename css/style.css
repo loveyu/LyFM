@@ -794,3 +794,9 @@ table#Upload_Box_QueueID td {
 	border-bottom: solid 1px #ccc;
 	padding: 3px 5px;
 }
+.order_select_box{
+	font-size: 15px;
+}
+.order_select_box select{
+	padding: 3px 4px;
+}

@@ -19,7 +19,11 @@ class Api{
 
 	public function file_list(){
 		//获取文件夹内文件和文件夹列表
-		$rt = $this->file_lib->get_file_list(get_core('LyGet')->get('path'));
+		/**
+		 * @var LyGet $get
+		 */
+		$get = get_core('LyGet');
+		$rt = $this->file_lib->get_file_list($get->get('path'),$get->get('order'),$get->get('by'));
 		$this->out_json($rt);
 	}
 

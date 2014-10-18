@@ -66,6 +66,6 @@ LyCode.prototype = {
 		$("#" + LyCode.ID + " .code").height($("#" + LyCode.ID).height() - $("#" + LyCode.ID + " .title").height());
 		$("#" + LyCode.ID + " .run").height($("#" + LyCode.ID).height() - $("#" + LyCode.ID + " .title").height());
 		$("#" + LyCode.ID + " .code").width($("#" + LyCode.ID).width() / 2);
-		$("#" + LyCode.ID + " .run").width($("#" + LyCode.ID).width() / 2);
+		$("#" + LyCode.ID + " .run").width($("#" + LyCode.ID).width() / 2-5);
 	}
 }; 

@@ -2,7 +2,9 @@
 class LibFile{
 	private $file_char_set = array('UTF-8','GBK','GB2312','ASCII','UNICODE','BIG5','UCS-2','UCS-2LE','UCS-2BE');
 	private $Media = array('jpg','jpeg','png','bmp','ico','gif','tif','tiff','mp3','mp4','avi','3gp','wav','ogg','mkv','pdf','rm','rmvb','wmv','mpg','vob','ts','flv','avi','f4v');
-	public function get_file_list($path){
+	private $order;
+	private $order_by;
+	public function get_file_list($path,$order='asc',$by='name'){
 		$ret = array('path'=>'','os'=>get_core()->get_os(),'parent'=>'','file'=>array(),'dir'=>array(),'link'=>array(),'exists'=>true);
 		$list = get_core('LyFile')->file_list($this->do_path($path));
 		$ret['exists'] = is_dir(system_path($list['path']));
@@ -50,7 +52,40 @@ class LibFile{
 			$ret['dir'][$i]['dir_number'] = $l2['dir'];
 			$i++;
 		}
+		$this->order_list($ret['file'],$order,$by);
+		$this->order_list($ret['dir'],$order,$by);
 		return $ret;
+	}
+
+	public function order_cmp( $a, $b ) {
+		$order_by = $this->order_by;
+		if ( !isset( $a[ $order_by ] ) || !isset( $b[$order_by ] ) ) {
+			$order_by = "name";
+		}
+		switch ( $order_by ) {
+			case 'name':
+				$c = strcmp( $a[ $order_by ], $b[ $order_by ] );
+				break;
+			case "size":
+			case "create":
+			case "altera":
+				$c = $a[ $order_by ] -$b[ $order_by ];
+				break;
+			default:
+				return 0;
+		}
+		if ( $this->order == "desc" ) {
+			$c = 0 - $c;
+		}
+		return $c;
+	}
+	private function order_list(&$list,$order,$by){
+		$this->order = strtolower(trim($order));
+		$this->order_by = strtolower(trim($by));
+		if(!in_array($this->order_by,array('name','size','create','altera')) || !in_array($this->order,array('asc','desc'))){
+			return;
+		}
+		usort($list,[$this,'order_cmp']);
 	}
 	public function rename_one($path,$name){
 		$rt = array('status'=>false);

@@ -148,6 +148,13 @@ function load_file_list(path) {
 	fm.get_file_list(path);
 	return false;
 }
+
+function order_change(){
+	_ORDER.by = $("#SelectOrder").val();
+	_ORDER.order = $("#SelectOrder2").val();
+	load_file_list(NOW_PATH);
+}
+
 function click_all_checkbox() {
 	var n = 0;
 	var size = $("#file_list .table input[type=\"checkbox\"]").size();

@@ -14,6 +14,7 @@ var VERSION = '<?php echo VERSION?>';
 <?php if($_LibLogin->is_login() && $_LibTemplate->is_home()):?>
 var ROOT = '<?php echo str_replace("\\","/",dirname(WEB_PATH))?>';
 var NOW_PATH = ROOT;
+var _ORDER = {order:'asc',by:'name'};
 <?php endif;?>
 </script>
 <script type="text/javascript" src="<?php echo get_file_url('js/jquery-1.8.2.min.js')?>"></script>
