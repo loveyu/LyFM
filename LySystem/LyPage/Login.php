@@ -1,5 +1,8 @@
 <?php
 class Login{
+	/**
+	 * @var LibLogin
+	 */
 	private $lib;
 	function __construct(){
 		if(get_config('password')=='94a5f0635f5e7163fc23346870d55b52'){

@@ -16,11 +16,10 @@ class LySafe{
 		}
 	}
 	public function encrypt($encrypt,$key='') {
-		if(!function_exists('mcrypt_create_iv')){
+		if(!function_exists('mcrypt_encrypt')){
 			return self::encrypt_self($encrypt,$key);
 		}
-		$iv = mcrypt_create_iv ( mcrypt_get_iv_size ( MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB ), MCRYPT_RAND ); 
-		$passcrypt = mcrypt_encrypt ( MCRYPT_RIJNDAEL_256, $key, $encrypt, MCRYPT_MODE_ECB, $iv ); 
+		$passcrypt = mcrypt_encrypt ( MCRYPT_RIJNDAEL_256, md5($key), $encrypt, MCRYPT_MODE_ECB );
 		$encode = base64_encode ( $passcrypt ); 
 		return $encode; 
 	}
@@ -57,12 +56,11 @@ class LySafe{
 		return $tmp;
 	}
 	public function decrypt($decrypt,$key='') {
-		if(!function_exists('mcrypt_create_iv')){
+		if(!function_exists('mcrypt_decrypt')){
 			return self::decrypt_self($decrypt,$key);
 		}
 		$decoded = base64_decode ( $decrypt ); 
-		$iv = mcrypt_create_iv ( mcrypt_get_iv_size ( MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB ), MCRYPT_RAND ); 
-		$decrypted = mcrypt_decrypt ( MCRYPT_RIJNDAEL_256, $key, $decoded, MCRYPT_MODE_ECB, $iv );
+		$decrypted = mcrypt_decrypt ( MCRYPT_RIJNDAEL_256, md5($key), $decoded, MCRYPT_MODE_ECB);
 		return $decrypted; 
 	}
 	public function escape($string){

@@ -40,10 +40,10 @@ class LyUrl{
 		}
 	}
 	private function clean_url_more_char($url){
-		return preg_replace("/[\\/\\\]+/","/",$url);
+		return preg_replace("/[\\/\\\\]+/","/",$url);
 	}
 	private function make_req(){
-		if(!isset($_SERVER['PATH_INFO'])){
+		if(!isset($_SERVER['PATH_INFO']) || $_SERVER['PATH_INFO']===""){
 			$i = strpos($_SERVER['REQUEST_URI'],'?');
 			if($i===false){
 				$this->path = $_SERVER['REQUEST_URI'];
