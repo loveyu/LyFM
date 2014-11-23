@@ -433,11 +433,11 @@ class LibFile{
 					else $dis = $header['Content-Disposition'];
 					$i = strpos($dis,"filename=");
 					if($i!==false){
-						$name = substr($dis,$i+9);
+						$name = str_replace(["\"","'","\\","/",","],'',substr($dis,$i+9));
 					}
 				}
 				if(!$name){
-					$name = $this->get_basename($url);
+					$name = str_replace(["\"","'","\\","/",","],'',$this->get_basename($url));
 				}
 			}
 			unset($header);
