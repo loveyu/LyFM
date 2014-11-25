@@ -7,7 +7,13 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 class LyUrl{
 	private $path;
 	private $url_list;
-	function __construct(){
+	function __construct() {
+		if(!isset( $_SERVER['REQUEST_URI'])){
+			$_SERVER['REQUEST_URI'] = $_SERVER['PHP_SELF'];
+			if(isset($_SERVER['QUERY_STRING'])){
+				$_SERVER['REQUEST_URI'] .= '?'.$_SERVER['QUERY_STRING'];
+			}
+		}
 		$this->init_param();
 	}
 	private function make_list(){
