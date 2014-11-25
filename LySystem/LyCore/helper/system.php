@@ -33,6 +33,23 @@ function get_file_url($param=''){
 	if(is_array($param))return WEB_URL.implode("/",$param);
 	return WEB_FILE_URL.$param;
 }
+
+/**
+ * 打印调试信息
+ * @return string
+ */
+function print_stack_trace()
+{
+	$array =debug_backtrace();
+	//print_r($array);//信息很齐全
+	unset($array[0]);
+	$html = "";
+	foreach($array as $row)
+	{
+		$html .="<p>".$row['file'].':'.$row['line'].' line, call:'.$row['function']."<p>";
+	}
+	return $html;
+}
 function redirect($uri = '', $method = 'location', $http_response_code = 302){
 	if ( ! preg_match('#^https?://#i', $uri)){
 		$uri = get_url($uri);

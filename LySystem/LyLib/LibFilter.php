@@ -2,6 +2,9 @@
 class LibFilter{
 	public function URL(){
 		$this->setTimeZone();
+		/**
+		 * @var $login LibLogin
+		 */
 		$login = get_core()->load_lib('LibLogin');
 		$url_list = get_core('LyUrl')->get_req_list();
 		if($login->is_login()){

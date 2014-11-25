@@ -35,6 +35,7 @@ class LyCore{
 			$r .= "['$v']";
 		}
 		if($r){
+			$rt = NULL;
 			eval('if(isset($this->config'.$r.'))$rt = $this->config'.$r.';else $rt=false;');
 			return $rt;
 		}else{

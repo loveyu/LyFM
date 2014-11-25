@@ -34,14 +34,22 @@ class LyCookie{
 		setcookie($this->prefix.$name,"",0,$this->get_path($path),$this->get_domain($domain),'');
 	}
 	private function get_path($path){
-		if(''==$path)return URL_PATH;
-		else return $path;
+		if(''==$path){
+			$path = URL_PATH;
+		}else{
+			$path = trim($path);
+		}
+		$path= str_replace('\\',"/",$path);
+		return $path;
 	}
 	private function get_domain($domain){
 		$host = $_SERVER['HTTP_HOST'];
 		$i = strpos($host,":");
 		if($i>0){
 			$host = substr($host,0,$i);
+		}
+		if(strpos($host,".")===false){
+			return $host;
 		}
 		if(strlen($host) >3 && is_numeric(str_replace(".","",substr($host,-3)))){
 			//排除HOST为IP的情形
