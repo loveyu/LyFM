@@ -25,7 +25,10 @@ $config = array(
 	),
 	'MaxDlSize' => '52428800',//B 最大下载文件
 );
-define('_Debug_', false);
+/**
+ * 是否使用调试模式，启用后会输出错误信息
+ */
+define('_Debug_', true);
 if(_Debug_){
     ini_set('display_errors','on');
     error_reporting(E_ALL | E_STRICT);

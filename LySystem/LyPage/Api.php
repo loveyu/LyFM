@@ -224,7 +224,7 @@ class Api{
 		header("content-Type: application/json; charset=utf-8");
 		header("Cache-Control: no-cache, must-revalidate");
 		header("Pragma: no-cache");
-		echo json_encode($content);
+		echo json_encode($content,JSON_UNESCAPED_UNICODE);
 	}
 }
 

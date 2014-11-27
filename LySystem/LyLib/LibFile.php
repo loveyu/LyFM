@@ -23,7 +23,7 @@ class LibFile{
 			$ret['file'][$i]['perms'] = substr(sprintf('%o', @fileperms($system)), -4);
 			$ret['file'][$i]['owner'] = $this->get_file_owner($system);
 			$ret['file'][$i]['group'] = $this->get_file_group($system);
-			$ret['file'][$i]['owner_id'] = @fileowner($file);
+			$ret['file'][$i]['owner_id'] = @fileowner($system);
 			$ret['file'][$i]['group_id'] = @filegroup($system);
 			$ret['file'][$i]['create'] = @filectime($system);
 			$ret['file'][$i]['altera'] = @filemtime($system);
@@ -43,9 +43,9 @@ class LibFile{
 			$ret['dir'][$i]['group'] = $this->get_file_group($system);
 			$ret['dir'][$i]['create'] = @filectime($system);
 			$ret['dir'][$i]['altera'] = @filemtime($system);
-			$ret['dir'][$i]['d_create'] = @date("Y年m月d日 H:i.s",$ret['file'][$i]['create']);
-			$ret['dir'][$i]['d_altera'] = @date("Y年m月d日 H:i.s",$ret['file'][$i]['altera']);
-			$ret['dir'][$i]['owner_id'] = @fileowner($file);
+			$ret['dir'][$i]['d_create'] = @date("Y年m月d日 H:i.s",$ret['dir'][$i]['create']);
+			$ret['dir'][$i]['d_altera'] = @date("Y年m月d日 H:i.s",$ret['dir'][$i]['altera']);
+			$ret['dir'][$i]['owner_id'] = @fileowner($system);
 			$ret['dir'][$i]['group_id'] = @filegroup($system);
 			$l2 = get_core('LyFile')->count_file_list($this->do_path($dir));
 			$ret['dir'][$i]['file_number'] = $l2['file'];
@@ -322,8 +322,8 @@ class LibFile{
 		return preg_replace('/^.+[\\\\\\/]/', '', $filename);
     }
 	public function get_file($file,$char_set="utf-8"){
-		$file = system_path($this->do_path($file));
 		$arr = array('status'=>false,'path'=>$file,'char_set'=>$char_set,'text'=>'','error'=>'');
+		$file = system_path($this->do_path($file));
 		if(!is_file($file)){
 			$arr['error']='文件不存在';
 			return $arr;

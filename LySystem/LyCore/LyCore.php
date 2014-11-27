@@ -19,6 +19,7 @@ class LyCore{
 		$this->core_lib = array();
 		$this->web_check = false;
 		$this->init_param($core,$page,$view,$lib);
+		$this->load_helper('system');
 	}
 	public function load_config($file){
 		if(is_file(WEB_PATH.$file.".php")){
@@ -46,7 +47,6 @@ class LyCore{
 		return substr(PHP_OS,0,3)!='WIN'?"Linux":"Win";
 	}
 	public function default_load(){
-		$this->load_helper('system');
 		$this->load_core('LyTime','LyUrl','LySafe','LyRequest','LyPost','LyGet','LyCookie','LyFile');
 		if(!$this->filter->LIB()){
 			$this->core_error('Filter LIB 库加载失败');

@@ -1,8 +1,12 @@
 <?php
-define('VERSION','0.2.3');
+define('VERSION','0.2.4');
 require_once('LySystem/LyCore/LyCore.php');
 $LyFile = new LyCore('LySystem/LyCore','LySystem/LyPage','LySystem/LyView','LySystem/LyLib');//核心文件夹目录，页面文件夹,视图文件夹,用户定义类
 $LyFile->load_config("config");
+if(_Debug_) {
+	set_error_handler('php_error_log');
+	register_shutdown_function('shutdown_error_log');
+}
 $LyFile->load_filter("LibFilter");//加载过滤器,任意一过滤方法返回false后结束执行
 								//URL()//页面解析之后
 								//LIB()//页面加载之前

@@ -46,7 +46,9 @@ function print_stack_trace()
 	$html = "";
 	foreach($array as $row)
 	{
-		$html .="<p>".$row['file'].':'.$row['line'].' line, call:'.$row['function']."<p>";
+		$html .="<p>".(isset($row['file'])?$row['file']:"__").':'.
+		              (isset($row['line'])?$row['line']:"__").' line, call:'.
+		              (isset($row['function'])?$row['function']:"__")."<p>\n";
 	}
 	return $html;
 }
@@ -74,4 +76,39 @@ function porgram_path($path){
 	else
 		return rtrim($path);
 }
-?>
+
+
+/**
+ * 输出错误信息
+ * @param $error
+ * @param $message
+ * @param $file
+ * @param $line
+ */
+function php_error_log($error=null, $message=null, $file=null, $line=null){
+	$type = NULL;
+	switch($error){
+		case E_COMPILE_ERROR:
+			$type = "E_COMPILE_ERROR";
+			break;
+		case E_ERROR:
+			$type = "E_ERROR";
+			break;
+		case E_WARNING:
+			$type = "E_WARNING";
+			break;
+		case E_NOTICE:
+			$type = "E_NOTICE";
+			break;
+		default:
+			$type = "UNKNOWN";
+	}
+	echo @"\n<br />\n<b>{$type}</b>:  {$message} in <b>{$file}</b> on line <b>{$line}</b><br />\n";
+	echo print_stack_trace();
+}
+
+function shutdown_error_log(){
+	if ( ( $e = error_get_last() ) && $e['type'] == E_ERROR || $e['type'] == E_COMPILE_ERROR ) {
+		call_user_func_array( 'php_error_log', $e );
+	}
+}
