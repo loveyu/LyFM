@@ -47,7 +47,8 @@ class LyFile{
 	public function delete_file_dir($path,&$list){
 		$system_path = system_path($path);
 		if(is_dir($system_path)){
-			if(!is_readable($system_path) || is_writeable($system_path) || !($handle=opendir($system_path))){
+			$handle = opendir($system_path);
+			if(!$handle){
 				array_push($list,array('status'=>false,'path'=>$path,'type'=>'dir'));
 				return false;
 			}
