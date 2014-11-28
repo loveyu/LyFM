@@ -11,7 +11,7 @@ LyFM 是一个基于PHP的个人网站文件管理器，采用完全Ajax操作�
 * 建议将程序放在file目录下，nginx和apache伪静态配置请参考范例，IIS请使用PATH_INFO访问。
 * 默认访问形式为 http://127.0.0.1/file/index.php/ 请主动添加后缀
 * 如果需要修改程序目录请相应修改伪静态规则
-* 如果需要增加对其他文本格式的编辑支持，可手动修改js目录下的`LyApi.js`的第一个TextFileExtenName数组
+* 如果需要增加对其他文本格式的编辑支持，可手动修改js目录下的`LyApi.js`的第一个`TextFileExtenName`数组
 * 如果访问首页跳转到404页面的，如果支持PATH_INFO请主动添加`/index.php/`来访问，否则节哀。
 
 ## 问题说明
@@ -22,6 +22,7 @@ LyFM 是一个基于PHP的个人网站文件管理器，采用完全Ajax操作�
 ## 在IIS 5.1下的配置
 
 由于IIS5.1实在奇葩，PATH_INFO各种不好实现，所以用字符串拼了一个，前提是需要ReWrite的支持
+
 1. 下载 http://www.helicontech.com/isapi_rewrite/download.html 进行配置
 2. 打开ISAPI_Rewrite Manager 添加如下内容，配置而选一
 
@@ -30,7 +31,6 @@ LyFM 是一个基于PHP的个人网站文件管理器，采用完全Ajax操作�
 		
 		#根目录
 		RewriteRule /index.php/(.*) /index\.php
-
 
 3. 修改php.ini 文件必须开启mb_string模块
 4. 重启IIS服务
@@ -48,7 +48,6 @@ LyFM 是一个基于PHP的个人网站文件管理器，采用完全Ajax操作�
 
 		rename("../file", "../file2");
 		rename("../LyFM-new", "../file");
-		
 		
 5. 此时返回结果为空
 6. 刷新页面即可，然后删除file2旧的文件夹
