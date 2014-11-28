@@ -49,6 +49,15 @@ class LyUrl{
 		return preg_replace("/[\\/\\\\]+/","/",$url);
 	}
 	private function make_req(){
+		if(isset($_SERVER['SERVER_SOFTWARE']) && strtolower($_SERVER['SERVER_SOFTWARE'])=="microsoft-iis/5.1" &&!isset($_SERVER['PATH_INFO']) && isset($_SERVER['HTTP_X_ORIGINAL_URL'])){
+			$pos = strpos($_SERVER['HTTP_X_ORIGINAL_URL'],'?');
+			$len = strlen($_SERVER["PHP_SELF"]);
+			if($pos===false){
+				$_SERVER['PATH_INFO'] = substr($_SERVER['HTTP_X_ORIGINAL_URL'],$len);
+			}else{
+				$_SERVER['PATH_INFO'] = substr($_SERVER['HTTP_X_ORIGINAL_URL'],$len,$pos-$len);
+			}
+		}
 		if(!isset($_SERVER['PATH_INFO']) || $_SERVER['PATH_INFO']===""){
 			$i = strpos($_SERVER['REQUEST_URI'],'?');
 			if($i===false){

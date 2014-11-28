@@ -29,7 +29,7 @@ class LyFile{
 	public function count_file_list($dir){
 		$rt = array('file'=>0,'dir'=>0,'path'=>$dir);
 		$dir = system_path($dir);
-		if(!is_dir($dir))return $rt;
+		if(!is_dir($dir) || !is_readable($dir))return $rt;
 		$handle = opendir($dir);
 		if(!$handle)return $rt;
 		while ($file = readdir($handle)) {
@@ -47,8 +47,7 @@ class LyFile{
 	public function delete_file_dir($path,&$list){
 		$system_path = system_path($path);
 		if(is_dir($system_path)){
-			$handle = opendir($system_path);
-			if(!$handle){
+			if(!is_readable($system_path) || is_writeable($system_path) || !($handle=opendir($system_path))){
 				array_push($list,array('status'=>false,'path'=>$path,'type'=>'dir'));
 				return false;
 			}
@@ -64,9 +63,10 @@ class LyFile{
 			array_push($list,array('status'=>$status,'path'=>$path,'type'=>'dir'));
 			if(!$status)return false;
 		}elseif(is_file($system_path)){
-			$status = @unlink($system_path);
-			array_push($list,array('status'=>$status,'path'=>$path,'type'=>'file'));
-			if(!$status)return false;
+			if(!is_writeable($system_path) || !@unlink($system_path)){
+				array_push($list,array('status'=>false,'path'=>$path,'type'=>'file'));
+				return false;
+			}
 		}
 		return true;
 	}

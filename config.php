@@ -5,7 +5,7 @@ $config = array(
 	'password' => '94a5f0635f5e7163fc23346870d55b52',//default 94a5f0635f5e7163fc23346870d55b52 使用密码的MD5值
 	'system' => array(
 		'404_page' => '',//404页面，留空默认系统
-		'cookie_prefix' => 'ly_fm_',//COOKIE前缀,留空为空
+		'cookie_prefix' => 'fm_',//COOKIE前缀,留空为空
 		'cookie_domain' => '',//COOKIE域名,留空为默认包含全部子域
 		'cookie_hash' => '68468gt579*&)&tgluik',//COOKIE加密字符串，留空不加密
 	),
@@ -28,7 +28,7 @@ $config = array(
 /**
  * 是否使用调试模式，启用后会输出错误信息
  */
-define('_Debug_', true);
+define('_Debug_', false);
 if(_Debug_){
     ini_set('display_errors','on');
     error_reporting(E_ALL | E_STRICT);

@@ -38,7 +38,7 @@ class LibFile{
 			$ret['dir'][$i] = array();
 			$ret['dir'][$i]['name'] = $this->get_basename($dir);
 			$ret['dir'][$i]['path'] = $dir;
-			$ret['dir'][$i]['perms'] = substr(sprintf('%o', @fileperms($system)), -4);
+			$ret['dir'][$i]['perms'] = substr(sprintf('%o', is_readable($system)?@fileperms($system):0), -4);
 			$ret['dir'][$i]['owner'] = $this->get_file_owner($system);
 			$ret['dir'][$i]['group'] = $this->get_file_group($system);
 			$ret['dir'][$i]['create'] = @filectime($system);
@@ -91,7 +91,7 @@ class LibFile{
 		$rt = array('status'=>false);
 		$path = $this->do_path($path);
 		$name = str_replace("/","",$this->do_path($name));
-		if(file_exists(system_path($path))){
+		if(file_exists(system_path($path)) && is_writeable(system_path($path))){
 			if(rename(system_path($path),system_path(dirname($path)."/".$name))){
 				$rt['status'] = true;
 			}
@@ -118,7 +118,7 @@ class LibFile{
 			return array('status'=>false,'error'=>'原始文件不存在');
 		}
 		$new_file_path = $new_path."/".$this->get_basename($path);
-		if(file_exists($new_file_path)){
+		if(file_exists($new_file_path) || !is_writeable($path)){
 			return array('status'=>false,'error'=>'目标文件已存在，移动失败!');
 		}
 		if(rename($path,$new_file_path)){
