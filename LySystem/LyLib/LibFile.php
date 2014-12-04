@@ -85,7 +85,7 @@ class LibFile{
 		if(!in_array($this->order_by,array('name','size','create','altera')) || !in_array($this->order,array('asc','desc'))){
 			return;
 		}
-		usort($list,[$this,'order_cmp']);
+		usort($list,array($this,'order_cmp'));
 	}
 	public function rename_one($path,$name){
 		$rt = array('status'=>false);
