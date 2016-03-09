@@ -60,6 +60,12 @@ LyFM.prototype.out_file_list = function () {
 	}
 };
 LyFM.prototype.make_dir_content = function (elem) {
+	if(!elem.owner.hasOwnProperty('name')){
+		elem.owner['name'] = "未知";
+	}
+	if(!elem.group.hasOwnProperty('name')){
+		elem.group['name'] = "未知";
+	}
 	return    '<tr>' +
 		'<td class="ico first" ><a href="#" onClick="return load_file_list(\'' + elem['path'] + '\');" title="进入文件夹"><img src="' + FILE_URL + 'images/folder_ico.png" alt="floder"/></a></td>' +
 		'<td class="file_name"><a href="#" onClick="return load_file_list(\'' + elem['path'] + '\');" title="进入文件夹">' + elem['name'] + '</a></td>' +
