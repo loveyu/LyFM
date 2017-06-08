@@ -6,6 +6,7 @@ class LibFile{
 	private $order_by;
 	public function get_file_list($path,$order='asc',$by='name'){
 		$ret = array('path'=>'','os'=>get_core()->get_os(),'parent'=>'','file'=>array(),'dir'=>array(),'link'=>array(),'exists'=>true);
+		$is_win = $ret['os']==="Win";
 		$list = get_core('LyFile')->file_list($this->do_path($path));
 		$ret['exists'] = is_dir(system_path($list['path']));
 		$ret['is_read'] = is_readable(system_path($list['path']));
@@ -23,8 +24,8 @@ class LibFile{
 			$ret['file'][$i]['perms'] = substr(sprintf('%o', @fileperms($system)), -4);
 			$ret['file'][$i]['owner'] = $this->get_file_owner($system);
 			$ret['file'][$i]['group'] = $this->get_file_group($system);
-			$ret['file'][$i]['owner_id'] = @fileowner($system);
-			$ret['file'][$i]['group_id'] = @filegroup($system);
+			$ret['file'][$i]['owner_id'] = $is_win?"":@fileowner($system);
+			$ret['file'][$i]['group_id'] = $is_win?"":@filegroup($system);
 			$ret['file'][$i]['create'] = @filectime($system);
 			$ret['file'][$i]['altera'] = @filemtime($system);
 			$ret['file'][$i]['d_create'] = @date("Y年m月d日 H:i.s",$ret['file'][$i]['create']);
@@ -45,8 +46,8 @@ class LibFile{
 			$ret['dir'][$i]['altera'] = @filemtime($system);
 			$ret['dir'][$i]['d_create'] = @date("Y年m月d日 H:i.s",$ret['dir'][$i]['create']);
 			$ret['dir'][$i]['d_altera'] = @date("Y年m月d日 H:i.s",$ret['dir'][$i]['altera']);
-			$ret['dir'][$i]['owner_id'] = @fileowner($system);
-			$ret['dir'][$i]['group_id'] = @filegroup($system);
+			$ret['dir'][$i]['owner_id'] = $is_win?"":@fileowner($system);
+			$ret['dir'][$i]['group_id'] = $is_win?"":@filegroup($system);
 			$l2 = get_core('LyFile')->count_file_list($this->do_path($dir));
 			$ret['dir'][$i]['file_number'] = $l2['file'];
 			$ret['dir'][$i]['dir_number'] = $l2['dir'];

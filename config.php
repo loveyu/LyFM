@@ -2,8 +2,10 @@
 //数组中不要使用下划线等字符，以免出错
 $config = array(
 	'title' => 'LY PHP 文件管理器',
-	'password' => '94a5f0635f5e7163fc23346870d55b52',//default 94a5f0635f5e7163fc23346870d55b52 使用密码的MD5值
-	'system' => array(
+	'password' => isset($_SERVER['ENV_DEFINE_LYFM_PASSWORD']) ?
+		$_SERVER['ENV_DEFINE_LYFM_PASSWORD'] : //这里如果定义一个环境变量则以环境变量的值为准
+		'94a5f0635f5e7163fc23346870d55b52',//default 94a5f0635f5e7163fc23346870d55b52 使用密码的MD5值
+	'system'   => array(
 		'404_page' => '',//404页面，留空默认系统
 		'cookie_prefix' => 'fm_',//COOKIE前缀,留空为空
 		'cookie_domain' => '',//COOKIE域名,留空为默认包含全部子域

@@ -65,18 +65,26 @@ function redirect($uri = '', $method = 'location', $http_response_code = 302){
 	exit;
 }
 function system_path($path){
-	if(PHP_OS=='WIN32' || PHP_OS=='WINNT')
+	static $convert = null;
+	if($convert === null) {
+		$convert = ((PHP_OS == 'WIN32' || PHP_OS == 'WINNT') && version_compare(PHP_VERSION, '7.1.0', '<'));
+	}
+	if($convert)
 		return rtrim(mb_convert_encoding($path,"GBK","UTF-8"));
 	else
 		return rtrim($path);
 }
 function porgram_path($path){
-	if(PHP_OS=='WIN32' || PHP_OS=='WINNT')
-		return rtrim(mb_convert_encoding($path,"UTF-8","GBK"));
-	else
+	static $convert = null;
+	if($convert === null) {
+		$convert = ((PHP_OS == 'WIN32' || PHP_OS == 'WINNT') && version_compare(PHP_VERSION, '7.1.0', '<'));
+	}
+	if($convert) {
+		return rtrim(mb_convert_encoding($path, "UTF-8", "GBK"));
+	}else {
 		return rtrim($path);
+	}
 }
-
 
 /**
  * 输出错误信息

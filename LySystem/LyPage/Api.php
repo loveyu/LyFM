@@ -23,6 +23,7 @@ class Api{
 		 * @var LyGet $get
 		 */
 		$get = get_core('LyGet');
+		header("Content-Type: text/plain;charset=utf-8");
 		$rt = $this->file_lib->get_file_list($get->get('path'),$get->get('order'),$get->get('by'));
 		$this->out_json($rt);
 	}
